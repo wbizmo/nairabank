@@ -8,6 +8,7 @@ import { Navigation } from "../components/layout/Navigation"
 import { LogoutDialog } from "../components/session/LogoutDialog"
 import { SignedOutView } from "../components/session/SignedOutView"
 import { useDashboard } from "../hooks/useDashboard"
+import { useDocumentTitle } from "../hooks/useDocumentTitle"
 import { useNavigationStore } from "../store/useNavigationStore"
 import { useSessionStore } from "../store/useSessionStore"
 
@@ -33,6 +34,8 @@ export default function App() {
   const restoreSession = useSessionStore((state) => state.restoreSession)
 
   const [toast, setToast] = useState<string | null>(null)
+
+  useDocumentTitle(activeView)
 
   if (sessionStatus === "signed-out") {
     return <SignedOutView onRestore={restoreSession} />
