@@ -1,0 +1,2 @@
+export class HttpError extends Error{constructor(message:string,public readonly status:number){super(message);this.name="HttpError"}}
+export async function getJson<T>(url:string,signal?:AbortSignal):Promise<T>{const response=await fetch(url,{headers:{Accept:"application/json"},signal});if(!response.ok)throw new HttpError(`Request failed with status ${response.status}`,response.status);return response.json() as Promise<T>}
