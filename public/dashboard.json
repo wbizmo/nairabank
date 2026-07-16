@@ -1,0 +1,15 @@
+{
+  "account":{"holderName":"Amara Chukwu","accountNumber":"0192837465","balance":482350.75,"dailyLimit":500000,"dailyUsed":76500,"monthlyLimit":5000000,"monthlyUsed":1875200},
+  "trend":[40,44,42,48,46,52,58],
+  "transactions":[
+    {"id":"t1","merchant":"Salary - Zivora Systems","category":"Income","amount":650000,"kind":"credit","date":"2026-07-15","status":"successful"},
+    {"id":"t2","merchant":"Jumia","category":"Shopping","amount":24500,"kind":"debit","date":"2026-07-15","status":"successful"},
+    {"id":"t3","merchant":"Bolt","category":"Transport","amount":3200,"kind":"debit","date":"2026-07-14","status":"successful"},
+    {"id":"t4","merchant":"DSTV Subscription","category":"Bills","amount":21500,"kind":"debit","date":"2026-07-13","status":"successful"},
+    {"id":"t5","merchant":"Transfer to Olive B.","category":"Transfers","amount":40000,"kind":"debit","date":"2026-07-12","status":"successful"},
+    {"id":"t6","merchant":"Chicken Republic","category":"Food","amount":8600,"kind":"debit","date":"2026-07-12","status":"successful"}
+  ],
+  "categories":[
+    {"name":"Bills","value":36500,"color":"#B98B2E"},{"name":"Shopping","value":24500,"color":"#1F8A5F"},{"name":"Food","value":8600,"color":"#4C6B8A"},{"name":"Transport","value":3200,"color":"#B85C3E"},{"name":"Transfers","value":40000,"color":"#7A5C8A"}
+  ]
+}
