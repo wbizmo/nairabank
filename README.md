@@ -38,3 +38,9 @@ Output directory: `dist`
 ## Disclaimer
 
 This is a portfolio demonstration. It does not authenticate users, store customer data, initiate transfers, or connect to financial infrastructure.
+
+## Deployment status
+
+The dashboard is deployed as a static Vite application. Production releases are created from the default branch after linting, type checking, tests, and the production build pass.
+
+The current implementation uses a simulated JSON service layer and does not connect to real banking infrastructure.
