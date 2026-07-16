@@ -1,0 +1,4 @@
+import type { Account } from "../../domain/dashboard"
+import { formatNaira,percentage } from "../../utils/formatters"
+function Limit({label,used,limit}:{label:string;used:number;limit:number}){return <div className="nb-limit"><div className="nb-limit-row"><span>{label}</span><span>{formatNaira(used)} / {formatNaira(limit)}</span></div><div className="nb-limit-track" role="progressbar" aria-label={`${label} transfer limit used`} aria-valuenow={Math.round(percentage(used,limit))} aria-valuemin={0} aria-valuemax={100}><div className="nb-limit-fill" style={{width:`${percentage(used,limit)}%`}}/></div></div>}
+export function TransferLimits({account}:{account:Account}){return <section className="nb-panel"><h2 className="nb-panel-title">Transfer limits</h2><Limit label="Daily" used={account.dailyUsed} limit={account.dailyLimit}/><Limit label="Monthly" used={account.monthlyUsed} limit={account.monthlyLimit}/></section>}
