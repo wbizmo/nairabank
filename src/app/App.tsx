@@ -1,0 +1,13 @@
+import { useState } from "react"
+import { AppShell } from "../components/layout/AppShell"
+import { BalanceHero } from "../components/dashboard/BalanceHero"
+import { QuickActions } from "../components/dashboard/QuickActions"
+import { SpendingChart } from "../components/dashboard/SpendingChart"
+import { TransactionList } from "../components/dashboard/TransactionList"
+import { TransferLimits } from "../components/dashboard/TransferLimits"
+import { DashboardSkeleton } from "../components/common/DashboardSkeleton"
+import { ErrorState } from "../components/feedback/ErrorState"
+import { Toast } from "../components/feedback/Toast"
+import { useDashboard } from "../hooks/useDashboard"
+import { useDashboardStore } from "../store/useDashboardStore"
+export function App(){const{status,data,error,retry}=useDashboard();const visible=useDashboardStore((s)=>s.balanceVisible);const toggle=useDashboardStore((s)=>s.toggleBalance);const tab=useDashboardStore((s)=>s.activeTab);const setTab=useDashboardStore((s)=>s.setActiveTab);const[toast,setToast]=useState("");const action=(label:string)=>{setToast(`${label} is simulated in this frontend demo.`);window.setTimeout(()=>setToast(""),2200)};return <AppShell holderName={data?.account.holderName} activeTab={tab} onTabChange={setTab}>{status==="loading"||status==="idle"?<DashboardSkeleton/>:status==="error"?<ErrorState message={error??"Unexpected error"} onRetry={()=>void retry()}/>:data?<><BalanceHero account={data.account} trend={data.trend} visible={visible} onToggle={toggle}/><QuickActions onAction={action}/><div className="nb-grid"><TransactionList transactions={data.transactions}/><div className="nb-side-stack"><SpendingChart categories={data.categories}/><TransferLimits account={data.account}/></div></div></>:null}{toast&&<Toast message={toast}/>}</AppShell>}

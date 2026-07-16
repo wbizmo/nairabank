@@ -1,0 +1,5 @@
+import { Eye,EyeSlash } from "@phosphor-icons/react"
+import type { Account } from "../../domain/dashboard"
+import { formatNaira,maskAccountNumber } from "../../utils/formatters"
+import { Sparkline } from "./Sparkline"
+export function BalanceHero({account,trend,visible,onToggle}:{account:Account;trend:number[];visible:boolean;onToggle:()=>void}){return <section className="nb-hero" aria-labelledby="balance-title"><div className="nb-hero-texture"/><div className="nb-hero-row"><div><p id="balance-title" className="nb-hero-label">Available balance</p><div className="nb-balance">{visible?formatNaira(account.balance,2):"₦ ••••••••"}</div></div><button className="nb-toggle" type="button" onClick={onToggle}>{visible?<EyeSlash size={15}/>:<Eye size={15}/>} {visible?"Hide balance":"Show balance"}</button></div><div className="nb-hero-foot"><div className="nb-hero-meta"><span>{account.holderName} · {maskAccountNumber(account.accountNumber)}</span><span>7-day trend <b>+5.2%</b></span></div><div className="nb-spark"><Sparkline points={trend}/></div></div></section>}

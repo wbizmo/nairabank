@@ -1,0 +1,4 @@
+import type { ReactNode } from "react"
+import { Bell } from "@phosphor-icons/react"
+import { Navigation } from "./Navigation"
+export function AppShell({holderName,activeTab,onTabChange,children}:{holderName?:string;activeTab:string;onTabChange:(tab:string)=>void;children:ReactNode}){const first=holderName?.split(" ")[0];return <div className="nb-root"><div className="nb-layout"><aside className="nb-sidebar"><div className="nb-logo">naira<span>bank</span></div><Navigation activeTab={activeTab} onChange={onTabChange}/></aside><main className="nb-main"><header className="nb-topbar"><div className="nb-greeting">{first?<>Welcome back, <strong>{first}</strong></>:<>&nbsp;</>}</div><button className="nb-icon-button" type="button" aria-label="Notifications"><Bell size={19}/><span className="nb-notification-dot"/></button></header>{children}</main></div><Navigation mobile activeTab={activeTab} onChange={onTabChange}/></div>}
