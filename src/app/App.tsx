@@ -1,13 +1,51 @@
 import { useState } from "react"
-import { AppShell } from "../components/layout/AppShell"
-import { BalanceHero } from "../components/dashboard/BalanceHero"
-import { QuickActions } from "../components/dashboard/QuickActions"
-import { SpendingChart } from "../components/dashboard/SpendingChart"
-import { TransactionList } from "../components/dashboard/TransactionList"
-import { TransferLimits } from "../components/dashboard/TransferLimits"
+import { ViewRouter } from "../components/navigation/ViewRouter"
 import { DashboardSkeleton } from "../components/common/DashboardSkeleton"
 import { ErrorState } from "../components/feedback/ErrorState"
 import { Toast } from "../components/feedback/Toast"
+import { AppShell } from "../components/layout/AppShell"
+import { Navigation } from "../components/layout/Navigation"
 import { useDashboard } from "../hooks/useDashboard"
-import { useDashboardStore } from "../store/useDashboardStore"
-export function App(){const{status,data,error,retry}=useDashboard();const visible=useDashboardStore((s)=>s.balanceVisible);const toggle=useDashboardStore((s)=>s.toggleBalance);const tab=useDashboardStore((s)=>s.activeTab);const setTab=useDashboardStore((s)=>s.setActiveTab);const[toast,setToast]=useState("");const action=(label:string)=>{setToast(`${label} is simulated in this frontend demo.`);window.setTimeout(()=>setToast(""),2200)};return <AppShell holderName={data?.account.holderName} activeTab={tab} onTabChange={setTab}>{status==="loading"||status==="idle"?<DashboardSkeleton/>:status==="error"?<ErrorState message={error??"Unexpected error"} onRetry={()=>void retry()}/>:data?<><BalanceHero account={data.account} trend={data.trend} visible={visible} onToggle={toggle}/><QuickActions onAction={action}/><div className="nb-grid"><TransactionList transactions={data.transactions}/><div className="nb-side-stack"><SpendingChart categories={data.categories}/><TransferLimits account={data.account}/></div></div></>:null}{toast&&<Toast message={toast}/>}</AppShell>}
+import { useNavigationStore } from "../store/useNavigationStore"
+
+export default function App() {
+  const {
+    status,
+    dashboard,
+    balanceVisible,
+    toggleBalanceVisible,
+    retry,
+  } = useDashboard()
+
+  const activeView = useNavigationStore((state) => state.activeView)
+  const setActiveView = useNavigationStore((state) => state.setActiveView)
+  const [toast, setToast] = useState<string | null>(null)
+
+  return (
+    <AppShell
+      navigation={
+        <Navigation
+          activeView={activeView}
+          onNavigate={setActiveView}
+        />
+      }
+      holderName={dashboard?.account.holderName}
+    >
+      {(status === "idle" || status === "loading") && <DashboardSkeleton />}
+
+      {status === "error" && <ErrorState onRetry={retry} />}
+
+      {status === "success" && dashboard && (
+        <ViewRouter
+          activeView={activeView}
+          dashboard={dashboard}
+          balanceVisible={balanceVisible}
+          onToggleBalance={toggleBalanceVisible}
+          onAction={setToast}
+        />
+      )}
+
+      {toast && <Toast message={toast} onDismiss={() => setToast(null)} />}
+    </AppShell>
+  )
+}
