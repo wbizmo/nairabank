@@ -322,3 +322,150 @@
     width: 100%;
   }
 }
+
+.nb-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: rgba(9, 22, 17, 0.52);
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.nb-dialog {
+  width: min(430px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  padding: 25px;
+  box-shadow: 0 28px 80px rgba(9, 30, 22, 0.26);
+}
+
+.nb-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nb-dialog-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 13px;
+  background: #f7ebe8;
+  color: var(--danger);
+}
+
+.nb-dialog-close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.nb-dialog h2 {
+  margin: 22px 0 8px;
+  font-size: 22px;
+}
+
+.nb-dialog > p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.nb-dialog-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.nb-secondary-button,
+.nb-danger-button {
+  display: inline-flex;
+  min-height: 43px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.nb-secondary-button {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.nb-danger-button {
+  border: 1px solid var(--danger);
+  background: var(--danger);
+  color: #fff;
+}
+
+.nb-signed-out {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 5%, rgba(31, 138, 95, 0.13), transparent 32%),
+    var(--bg);
+  padding: 24px;
+}
+
+.nb-signed-out-card {
+  width: min(440px, 100%);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(14, 42, 32, 0.12);
+}
+
+.nb-signed-out-logo {
+  margin-bottom: 30px;
+  color: var(--hero);
+}
+
+.nb-signed-out-icon {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.nb-signed-out-card h1 {
+  margin: 0;
+  font-size: clamp(25px, 5vw, 34px);
+  letter-spacing: -0.04em;
+}
+
+.nb-signed-out-card > p:not(.nb-view-eyebrow) {
+  margin: 12px 0 24px;
+  color: var(--text-dim);
+  line-height: 1.65;
+}
+
+.nb-signed-out-card small {
+  display: block;
+  margin-top: 18px;
+  color: var(--text-dim);
+  font-size: 10px;
+}
