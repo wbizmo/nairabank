@@ -32,3 +32,7 @@ Fetching JSON preserves a genuine asynchronous browser boundary. Importing a con
 ## Cancellation
 
 A new request aborts the previous one, protecting the store from stale responses during retries and React Strict Mode remount behavior.
+
+## Runtime behaviour
+
+Dashboard data is loaded through the service boundary rather than imported directly into presentation components. The simulated request includes latency, cancellation support, recoverable failure handling, and explicit loading states. This keeps the current frontend demonstration structurally compatible with a future HTTP API.
