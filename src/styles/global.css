@@ -469,3 +469,20 @@
   color: var(--text-dim);
   font-size: 10px;
 }
+
+.nb-icon-button {
+  display: inline-grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.nb-icon-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
