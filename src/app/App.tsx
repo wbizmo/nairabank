@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { ViewRouter } from "../components/navigation/ViewRouter"
 import { DashboardSkeleton } from "../components/common/DashboardSkeleton"
 import { ErrorState } from "../components/feedback/ErrorState"
 import { Toast } from "../components/feedback/Toast"
 import { AppShell } from "../components/layout/AppShell"
 import { Navigation } from "../components/layout/Navigation"
+import { ViewRouter } from "../components/navigation/ViewRouter"
 import { LogoutDialog } from "../components/session/LogoutDialog"
 import { SignedOutView } from "../components/session/SignedOutView"
 import { useDashboard } from "../hooks/useDashboard"
@@ -15,9 +15,8 @@ import { useSessionStore } from "../store/useSessionStore"
 export default function App() {
   const {
     status,
-    dashboard,
-    balanceVisible,
-    toggleBalanceVisible,
+    data: dashboard,
+    error,
     retry,
   } = useDashboard()
 
@@ -33,6 +32,7 @@ export default function App() {
   const confirmLogout = useSessionStore((state) => state.confirmLogout)
   const restoreSession = useSessionStore((state) => state.restoreSession)
 
+  const [balanceVisible, setBalanceVisible] = useState(true)
   const [toast, setToast] = useState<string | null>(null)
 
   useDocumentTitle(activeView)
@@ -57,24 +57,34 @@ export default function App() {
           <DashboardSkeleton />
         )}
 
-        {status === "error" && <ErrorState onRetry={retry} />}
+        {status === "error" && (
+          <ErrorState
+            message={error ?? "Unable to load dashboard information."}
+            onRetry={() => {
+              void retry()
+            }}
+          />
+        )}
 
         {status === "success" && dashboard && (
           <ViewRouter
             activeView={activeView}
             dashboard={dashboard}
             balanceVisible={balanceVisible}
-            onToggleBalance={toggleBalanceVisible}
-            onAction={setToast}
+            onToggleBalance={() => {
+              setBalanceVisible((current) => !current)
+            }}
+            onAction={(message) => {
+              setToast(message)
+
+              window.setTimeout(() => {
+                setToast(null)
+              }, 2500)
+            }}
           />
         )}
 
-        {toast && (
-          <Toast
-            message={toast}
-            onDismiss={() => setToast(null)}
-          />
-        )}
+        {toast && <Toast message={toast} />}
       </AppShell>
 
       <LogoutDialog

@@ -1,9 +1,9 @@
-import type { DashboardData } from "../../domain/dashboard"
 import { BalanceHero } from "../../components/dashboard/BalanceHero"
 import { QuickActions } from "../../components/dashboard/QuickActions"
 import { SpendingChart } from "../../components/dashboard/SpendingChart"
 import { TransactionList } from "../../components/dashboard/TransactionList"
 import { TransferLimits } from "../../components/dashboard/TransferLimits"
+import type { DashboardData } from "../../domain/dashboard"
 
 interface OverviewViewProps {
   dashboard: DashboardData
@@ -24,7 +24,7 @@ export function OverviewView({
         account={dashboard.account}
         trend={dashboard.trend}
         visible={balanceVisible}
-        onToggleVisible={onToggleBalance}
+        onToggle={onToggleBalance}
       />
 
       <QuickActions onAction={onAction} />
