@@ -486,3 +486,84 @@
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* Desktop layout alignment fixes */
+@media (min-width: 1024px) {
+  .nb-main {
+    width: 100%;
+    max-width: none;
+    flex: 1 1 auto;
+    padding: 28px clamp(28px, 4vw, 64px) 100px;
+  }
+
+  .nb-topbar {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .nb-main > section,
+  .nb-main > .nb-hero,
+  .nb-main > .nb-actions,
+  .nb-main > .nb-grid,
+  .nb-main > .nb-view,
+  .nb-main > div:not(.nb-topbar):not(.nb-toast) {
+    width: min(100%, 1240px);
+    margin-inline: auto;
+  }
+
+  .nb-hero {
+    min-height: 190px;
+  }
+
+  .nb-hero-row {
+    align-items: center;
+  }
+
+  .nb-hero-foot {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(280px, 420px);
+    align-items: end;
+    gap: 32px;
+  }
+
+  .nb-spark {
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    overflow: hidden;
+  }
+
+  .nb-spark svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    transform: none;
+  }
+
+  .nb-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  }
+
+  .nb-grid > *,
+  .nb-side-stack,
+  .nb-panel {
+    min-width: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .nb-main {
+    padding-inline: clamp(48px, 5vw, 88px);
+  }
+
+  .nb-main > section,
+  .nb-main > .nb-hero,
+  .nb-main > .nb-actions,
+  .nb-main > .nb-grid,
+  .nb-main > .nb-view,
+  .nb-main > div:not(.nb-topbar):not(.nb-toast) {
+    width: min(100%, 1320px);
+  }
+}
